@@ -138,20 +138,20 @@ struct struct_TaskCtrlBlock{
 
 
 struct struct_PeriodicEvents{
-    int16 *ptrSemaphore;
+    void (* OS_ptrfcn_Event) (void);
     Uint32 Ticks;
 };
 typedef struct struct_PeriodicEvents s_PeriodicEvent;
 
 enum{
-    OS_RealTime_Thread_ID0=0,
+    OS_RealTime_Thread_ID0 = 0,
     OS_RealTime_Thread_ID1,
     OS_RealTime_Thread_ID2,
     OS_RealTime_MaxID
 };
 
 enum{
-    OS_Standard_Thread_ID0 = OS_RealTime_MaxID,
+    OS_Standard_Thread_ID0 = 0,
     OS_Standard_Thread_ID1,
     OS_Standard_Thread_ID2,
     OS_Standard_Thread_ID3,
@@ -213,7 +213,7 @@ void OS_Initialization(void);
 // add three foregound threads to the scheduler
 // Inputs: three pointers to a void/void foreground tasks
 // Outputs: 1 if successful, 0 if this thread can not be added
-Uint32 OS_u32_AddThreads( void(*ptrfcn_Event)(void), Uint16 ThreadID, Uint16 NextThreadID, Uint16 Priority);
+Uint32 OS_u32_AddThreads( void(*ptrfcn_Thread)(void), Uint16 ThreadID, Uint16 NextThreadID, Uint16 Priority);
 
 //******** OS_FirstThreadToRun ***************
 // Set first Thread to Run by scheduler
@@ -231,7 +231,7 @@ void OS_FirstThreadToRun(Uint16 ThreadID);
 // These threads cannot spin, block, loop, sleep, or kill
 // These threads can call OS_Signal
 //Uint32 OS_AddPeriodicEventThread(void(*ptrfcn_Thread)(void), Uint32 Period_ms);
-void OS_AddPeriodicEventThread(struct struct_PeriodicEvents *ptrfcn_Event, int16 *ptrSemaphore, Uint32 Period_ms);
+void OS_AddPeriodicEventThread(struct struct_PeriodicEvents *ptrfcn_EventBlock, void(*ptrfcn_Event)(void), Uint32 Period_ms);
 
 //******** OS_Launch ***************
 // start the scheduler, enable interrupts

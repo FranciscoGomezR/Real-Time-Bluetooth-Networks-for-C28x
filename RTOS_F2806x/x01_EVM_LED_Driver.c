@@ -144,6 +144,7 @@ void fcn_Event1ToggleGPIO55_J2_11(void);
          {
         	 CounterTask[x]+=1;
          }
+         OS_Sleep(130);
          //DelayT=100000;
          //while(DelayT--);
      }
@@ -175,7 +176,7 @@ void fcn_Event1ToggleGPIO55_J2_11(void);
          CounterTask2c+=3;
          //DelayT=200000;
          //while(DelayT--);
-
+         OS_Sleep(333);
      }
  }
 
@@ -199,6 +200,7 @@ void fcn_Event1ToggleGPIO55_J2_11(void);
          CounterTask3++;
          //DelayT=500000;
          //while(DelayT--);
+         OS_Sleep(200);
      }
  }
 
@@ -328,6 +330,8 @@ void fcn_Event1ToggleGPIO55_J2_11(void);
      GpioDataRegs.GPBCLEAR.bit.GPIO55 = 1;
      EDIS;
  }
+
+#if EVENT_FCN_WITH_WHILE == ENABLE
  void fcn_Event0ToggleGPIO50_J2_13(void)
  {
     static Uint32 event1=0;
@@ -370,5 +374,30 @@ void fcn_Event1ToggleGPIO55_J2_11(void);
          ENABLE__GLOBAL_INT();
      }
  }
-
-
+#endif
+#if EVENT_FCN_WITH_WHILE != ENABLE
+ void fcn_Event0ToggleGPIO50_J2_13(void)
+ {
+    static Uint32 event1=0;
+    event1++;
+    EALLOW;
+    GpioDataRegs.GPBTOGGLE.bit.GPIO50 = 1; //toggle
+    EDIS;
+ }
+ void fcn_Event1ToggleGPIO51_J2_12(void)
+ {
+     static Uint32 event2=0;
+    event2++;
+    EALLOW;
+    GpioDataRegs.GPBTOGGLE.bit.GPIO51 = 1; //toggle
+    EDIS;
+ }
+ void fcn_Event2ToggleGPIO55_J2_11(void)
+ {
+     static Uint32 event3=0;
+     event3++;
+     EALLOW;
+     GpioDataRegs.GPBTOGGLE.bit.GPIO55 = 1; //toggle
+     EDIS;
+ }
+#endif

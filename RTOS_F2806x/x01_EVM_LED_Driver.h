@@ -66,13 +66,13 @@
 //*****************************************************************************
 #include "F2806x_Cla_typedefs.h"// F2806x CLA Type definitions
 #include "F2806x_Device.h"      // F2806x Headerfile Include File
-
+#include "04_Utilities/x41_Utilities.h"
 //*****************************************************************************
 //
 //			PUBLIC DEFINES SECTION
 //
 //*****************************************************************************
-
+#define EVENT_FCN_WITH_WHILE       DISABLE
 //*****************************************************************************
 //
 //			PUBLIC STRUCTs, UNIONs ADN ENUMs SECTION

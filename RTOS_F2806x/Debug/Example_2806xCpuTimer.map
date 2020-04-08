@@ -1,7 +1,7 @@
 ******************************************************************************
              TMS320C2000 Linker PC v18.12.4                    
 ******************************************************************************
->> Linked Sun Apr  5 16:59:24 2020
+>> Linked Mon Apr  6 21:13:48 2020
 
 OUTPUT FILE NAME:   <Example_2806xCpuTimer.out>
 ENTRY POINT SYMBOL: "code_start"  address: 003f7ff6
@@ -21,7 +21,7 @@ PAGE 0:
   FLASHE                003e4000   00004000  00000000  00004000  RWIX
   FLASHD                003e8000   00004000  00000004  00003ffc  RWIX
   FLASHC                003ec000   00004000  00000000  00004000  RWIX
-  FLASHA                003f4000   00003f80  00000cd0  000032b0  RWIX
+  FLASHA                003f4000   00003f80  00000c50  00003330  RWIX
   CSM_RSVD              003f7f80   00000076  00000000  00000076  RWIX
   BEGIN                 003f7ff6   00000002  00000002  00000000  RWIX
   CSM_PWL_P0            003f7ff8   00000008  00000000  00000008  RWIX
@@ -90,7 +90,7 @@ PAGE 1:
   I2CA                  00007900   00000040  00000022  0000001e  RWIX
   RAML2                 00008c00   00000400  00000000  00000400  RWIX
   RAML3                 00009000   00001000  00000000  00001000  RWIX
-  RAML4                 0000a000   00004000  0000204c  00001fb4  RWIX
+  RAML4                 0000a000   00004000  00001480  00002b80  RWIX
   RAML6                 0000e000   00002000  00000000  00002000  RWIX
   RAML7                 00010000   00002000  00000000  00002000  RWIX
   RAML8                 00012000   00002000  00000000  00002000  RWIX
@@ -105,36 +105,36 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.cinit     0    003f4c8e    00000042     
-                  003f4c8e    00000023     x01_EVM_LED_Driver.obj (.cinit)
-                  003f4cb1    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
-                  003f4cbf    00000005                       : _lock.c.obj (.cinit:__lock)
-                  003f4cc4    00000005                       : _lock.c.obj (.cinit:__unlock)
-                  003f4cc9    00000005     x00_RTOS.obj (.cinit)
-                  003f4cce    00000002     --HOLE-- [fill = 0]
+.cinit     0    003f4c0e    00000042     
+                  003f4c0e    00000023     x01_EVM_LED_Driver.obj (.cinit)
+                  003f4c31    0000000e     rts2800_fpu32.lib : exit.c.obj (.cinit)
+                  003f4c3f    00000005                       : _lock.c.obj (.cinit:__lock)
+                  003f4c44    00000005                       : _lock.c.obj (.cinit:__unlock)
+                  003f4c49    00000005     x00_RTOS.obj (.cinit)
+                  003f4c4e    00000002     --HOLE-- [fill = 0]
 
 .pinit     0    003f4000    00000000     UNINITIALIZED
 
-.text      0    003f4000    00000b8e     
+.text      0    003f4000    00000b0e     
                   003f4000    0000039b     F2806x_DefaultIsr.obj (.text:retain)
-                  003f439b    0000024a     x00_RTOS.obj (.text)
-                  003f45e5    00000192     F2806x_SysCtrl.obj (.text)
-                  003f4777    00000128     x01_EVM_LED_Driver.obj (.text)
-                  003f489f    00000086     x00_RTOS.obj (.text:retain)
-                  003f4925    00000076     F2806x_CpuTimers.obj (.text)
-                  003f499b    0000006b     x00_main.obj (.text)
-                  003f4a06    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
-                  003f4a5c    0000004d     x00_OSasm.obj (.text)
-                  003f4aa9    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
-                  003f4ad2    00000028     F2806x_PieCtrl.obj (.text)
-                  003f4afa    00000026     F2806x_PieVect.obj (.text)
-                  003f4b20    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
-                  003f4b44    0000001d                       : memcpy.c.obj (.text)
-                  003f4b61    00000019                       : args_main.c.obj (.text)
-                  003f4b7a    00000009                       : _lock.c.obj (.text)
-                  003f4b83    00000008     F2806x_CodeStartBranch.obj (.text)
-                  003f4b8b    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
-                  003f4b8d    00000001                       : startup.c.obj (.text)
+                  003f439b    00000201     x00_RTOS.obj (.text)
+                  003f459c    00000192     F2806x_SysCtrl.obj (.text)
+                  003f472e    00000124     x01_EVM_LED_Driver.obj (.text)
+                  003f4852    00000077     x00_RTOS.obj (.text:retain)
+                  003f48c9    00000076     F2806x_CpuTimers.obj (.text)
+                  003f493f    00000056     rts2800_fpu32.lib : boot28.asm.obj (.text)
+                  003f4995    0000004d     x00_OSasm.obj (.text)
+                  003f49e2    00000047     x00_main.obj (.text)
+                  003f4a29    00000029     rts2800_fpu32.lib : exit.c.obj (.text)
+                  003f4a52    00000028     F2806x_PieCtrl.obj (.text)
+                  003f4a7a    00000026     F2806x_PieVect.obj (.text)
+                  003f4aa0    00000024     rts2800_fpu32.lib : cpy_tbl.c.obj (.text)
+                  003f4ac4    0000001d                       : memcpy.c.obj (.text)
+                  003f4ae1    00000019                       : args_main.c.obj (.text)
+                  003f4afa    00000009                       : _lock.c.obj (.text)
+                  003f4b03    00000008     F2806x_CodeStartBranch.obj (.text)
+                  003f4b0b    00000002     rts2800_fpu32.lib : pre_init.c.obj (.text)
+                  003f4b0d    00000001                       : startup.c.obj (.text)
 
 codestart 
 *          0    003f7ff6    00000002     
@@ -146,21 +146,21 @@ ramfuncs   0    003e8000    00000004     RUN ADDR = 00008000
 .stack     1    00000050    00000200     UNINITIALIZED
                   00000050    00000200     --HOLE--
 
-.ebss      1    0000a000    0000204c     UNINITIALIZED
-                  0000a000    00001f40     x00_RTOS.obj (.ebss:_Stacks)
-                  0000bf40    00000070     x00_RTOS.obj (.ebss:_sOS_TaskCtrlBlocks)
-                  0000bfb0    0000000c     x00_RTOS.obj (.ebss:_sa_PeriodicEvents)
-                  0000bfbc    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
-                  0000bfbe    00000002                       : _lock.c.obj (.ebss:__unlock)
-                  0000bfc0    00000040     x01_EVM_LED_Driver.obj (.ebss:_CounterTask$1)
-                  0000c000    0000001e     x01_EVM_LED_Driver.obj (.ebss)
-                  0000c01e    00000018     F2806x_CpuTimers.obj (.ebss)
-                  0000c036    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
-                  0000c03c    00000004     --HOLE--
-                  0000c040    0000000c     x00_RTOS.obj (.ebss)
+.ebss      1    0000a000    00001480     UNINITIALIZED
+                  0000a000    00001388     x00_RTOS.obj (.ebss:_Stacks)
+                  0000b388    0000001e     x01_EVM_LED_Driver.obj (.ebss)
+                  0000b3a6    00000018     F2806x_CpuTimers.obj (.ebss)
+                  0000b3be    00000002     rts2800_fpu32.lib : _lock.c.obj (.ebss:__lock)
+                  0000b3c0    00000046     x00_RTOS.obj (.ebss:_sOS_TaskCtrlBlocks)
+                  0000b406    0000000c     x00_RTOS.obj (.ebss:_sa_PeriodicEvents)
+                  0000b412    0000000c     x00_RTOS.obj (.ebss)
+                  0000b41e    00000006     rts2800_fpu32.lib : exit.c.obj (.ebss)
+                  0000b424    00000002                       : _lock.c.obj (.ebss:__unlock)
+                  0000b426    0000001a     --HOLE--
+                  0000b440    00000040     x01_EVM_LED_Driver.obj (.ebss:_CounterTask$1)
 
-.econst    0    003f4b8e    00000100     
-                  003f4b8e    00000100     F2806x_PieVect.obj (.econst:_PieVectTableInit)
+.econst    0    003f4b0e    00000100     
+                  003f4b0e    00000100     F2806x_PieVect.obj (.econst:_PieVectTableInit)
 
 .reset     0    003fffc0    00000002     DSECT
                   003fffc0    00000002     rts2800_fpu32.lib : boot28.asm.obj (.reset)
@@ -400,20 +400,20 @@ MODULE SUMMARY
        Module                          code   initialized data   uninitialized data
        ------                          ----   ----------------   ------------------
     .\
-       x00_RTOS.obj                    720    5                  8136              
+       x00_RTOS.obj                    632    5                  5094              
        F2806x_GlobalVariableDefs.obj   0      0                  3550              
        F2806x_DefaultIsr.obj           923    0                  0                 
-       x01_EVM_LED_Driver.obj          296    35                 94                
+       x01_EVM_LED_Driver.obj          292    35                 94                
        F2806x_SysCtrl.obj              402    0                  0                 
        F2806x_PieVect.obj              38     256                0                 
        F2806x_CpuTimers.obj            118    0                  24                
-       x00_main.obj                    107    0                  0                 
        x00_OSasm.obj                   77     0                  0                 
+       x00_main.obj                    71     0                  0                 
        F2806x_PieCtrl.obj              40     0                  0                 
        F2806x_CodeStartBranch.obj      10     0                  0                 
        F2806x_usDelay.obj              8      0                  0                 
     +--+-------------------------------+------+------------------+--------------------+
-       Total:                          2739   296                11804             
+       Total:                          2611   296                8762              
                                                                                    
     C:/ti/ccs930/ccs/tools/compiler/ti-cgt-c2000_18.12.4.LTS/lib/rts2800_fpu32.lib
        boot28.asm.obj                  86     0                  0                 
@@ -429,7 +429,7 @@ MODULE SUMMARY
                                                                                    
        Stack:                          0      0                  512               
     +--+-------------------------------+------+------------------+--------------------+
-       Grand Total:                    2968   320                12326             
+       Grand Total:                    2840   320                9284              
 
 
 GLOBAL DATA SYMBOLS: SORTED BY DATA PAGE
@@ -535,28 +535,27 @@ address     data page           name
 
 0000a000     280 (0000a000)     _Stacks
 
-0000bf40     2fd (0000bf40)     _sOS_TaskCtrlBlocks
+0000b388     2ce (0000b380)     _appSemaphore_Event1
+0000b389     2ce (0000b380)     _appSemaphore_Event2
+0000b38a     2ce (0000b380)     _appSemaphore_Event3
+0000b3a6     2ce (0000b380)     _CpuTimer0
+0000b3ae     2ce (0000b380)     _CpuTimer1
+0000b3b6     2ce (0000b380)     _CpuTimer2
+0000b3be     2ce (0000b380)     __lock
 
-0000bfb0     2fe (0000bf80)     _sa_PeriodicEvents
-0000bfbc     2fe (0000bf80)     __lock
-0000bfbe     2fe (0000bf80)     __unlock
+0000b3c0     2cf (0000b3c0)     _sOS_TaskCtrlBlocks
 
-0000c000     300 (0000c000)     _appSemaphore_Event1
-0000c001     300 (0000c000)     _appSemaphore_Event2
-0000c002     300 (0000c000)     _appSemaphore_Event3
-0000c01e     300 (0000c000)     _CpuTimer0
-0000c026     300 (0000c000)     _CpuTimer1
-0000c02e     300 (0000c000)     _CpuTimer2
-0000c036     300 (0000c000)     ___TI_enable_exit_profile_output
-0000c038     300 (0000c000)     ___TI_cleanup_ptr
-0000c03a     300 (0000c000)     ___TI_dtors_ptr
-
-0000c040     301 (0000c040)     _osExecTaskPtr
-0000c044     301 (0000c040)     _sm_Scheduler
+0000b406     2d0 (0000b400)     _sa_PeriodicEvents
+0000b412     2d0 (0000b400)     _osExecTaskPtr
+0000b416     2d0 (0000b400)     _sm_Scheduler
+0000b41e     2d0 (0000b400)     ___TI_enable_exit_profile_output
+0000b420     2d0 (0000b400)     ___TI_cleanup_ptr
+0000b422     2d0 (0000b400)     ___TI_dtors_ptr
+0000b424     2d0 (0000b400)     __unlock
 
 003d7e80    f5fa (003d7e80)     _PartIdRegs
 
-003f4b8e    fd2e (003f4b80)     _PieVectTableInit
+003f4b0e    fd2c (003f4b00)     _PieVectTableInit
 
 003f7ff8    fdff (003f7fc0)     _CsmPwl
 
@@ -566,7 +565,7 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 page  address   name                              
 ----  -------   ----                              
 0     003f4000  .text                             
-0     003f4aa9  C$$EXIT                           
+0     003f4a29  C$$EXIT                           
 0     003f40be  _ADCINT1_ISR                      
 0     003f40c8  _ADCINT2_ISR                      
 0     003f42d0  _ADCINT3_ISR                      
@@ -590,16 +589,16 @@ page  address   name
 1     00006400  _Comp1Regs                        
 1     00006420  _Comp2Regs                        
 1     00006440  _Comp3Regs                        
-0     003f4960  _ConfigCpuTimer                   
-1     0000c01e  _CpuTimer0                        
+0     003f4904  _ConfigCpuTimer                   
+1     0000b3a6  _CpuTimer0                        
 1     00000c00  _CpuTimer0Regs                    
-1     0000c026  _CpuTimer1                        
+1     0000b3ae  _CpuTimer1                        
 1     00000c08  _CpuTimer1Regs                    
-1     0000c02e  _CpuTimer2                        
+1     0000b3b6  _CpuTimer2                        
 1     00000c10  _CpuTimer2Regs                    
 1     003f7ff8  _CsmPwl                           
 1     00000ae0  _CsmRegs                          
-0     003f46ea  _CsmUnlock                        
+0     003f46a1  _CsmUnlock                        
 0     003f4014  _DATALOG_ISR                      
 0     003f4244  _DINTCH1_ISR                      
 0     003f424e  _DINTCH2_ISR                      
@@ -609,7 +608,7 @@ page  address   name
 0     003f4276  _DINTCH6_ISR                      
 0     00008000  _DSP28x_usDelay                   
 1     00000880  _DevEmuRegs                       
-0     003f4609  _DisableDog                       
+0     003f45c0  _DisableDog                       
 1     00001000  _DmaRegs                          
 0     003f42bc  _ECAN0INTA_ISR                    
 0     003f42c6  _ECAN1INTA_ISR                    
@@ -656,8 +655,8 @@ page  address   name
 1     00006b40  _EQep2Regs                        
 1     00000d01  _EmuBMode                         
 1     00000d00  _EmuKey                           
-0     003f4af1  _EnableInterrupts                 
-0     003f4761  _ExtOscSel                        
+0     003f4a71  _EnableInterrupts                 
+0     003f4718  _ExtOscSel                        
 1     00000a80  _FlashRegs                        
 1     00000d04  _Flash_CPUScaleFactor             
 1     00000d02  _Flash_CallbackPtr                
@@ -678,15 +677,15 @@ page  address   name
 0     003f403c  _ILLEGAL_ISR                      
 0     003f4000  _INT13_ISR                        
 0     003f400a  _INT14_ISR                        
-0     003f4925  _InitCpuTimers                    
-0     003f4694  _InitPeripheralClocks             
-0     003f4ad2  _InitPieCtrl                      
-0     003f4afa  _InitPieVectTable                 
-0     003f4611  _InitPll                          
-0     003f4666  _InitPll2                         
-0     003f45e5  _InitSysCtrl                      
-0     003f471b  _IntOsc1Sel                       
-0     003f472b  _IntOsc2Sel                       
+0     003f48c9  _InitCpuTimers                    
+0     003f464b  _InitPeripheralClocks             
+0     003f4a52  _InitPieCtrl                      
+0     003f4a7a  _InitPieVectTable                 
+0     003f45c8  _InitPll                          
+0     003f461d  _InitPll2                         
+0     003f459c  _InitSysCtrl                      
+0     003f46d2  _IntOsc1Sel                       
+0     003f46e2  _IntOsc2Sel                       
 0     003f4370  _LUF_ISR                          
 0     003f4366  _LVF_ISR                          
 0     003f4230  _MRINTA_ISR                       
@@ -694,27 +693,27 @@ page  address   name
 1     00005000  _McbspaRegs                       
 0     003f4032  _NMI_ISR                          
 1     00007060  _NmiIntruptRegs                   
-0     003f45d0  _OC_SetStackContenToZero          
+0     003f4587  _OC_SetStackContenToZero          
 0     003f4460  _OS_AddPeriodicEventThread        
 0     003f4452  _OS_FirstThreadToRun              
 0     003f439b  _OS_InitSemaphore                 
 0     003f43db  _OS_Initialization                
 0     003f446b  _OS_Launch                        
-0     003f489f  _OS_PeriodicEventsTick_Handler_isr
+0     003f4852  _OS_PeriodicEventsTick_Handler_isr
 0     003f449e  _OS_Scheduler                     
 0     003f43a2  _OS_Signal                        
-0     003f45c3  _OS_Sleep                         
-0     003f4a5c  _OS_Start                         
-0     003f45c0  _OS_Suspend                       
-0     003f4a81  _OS_SystemTick_Handler_isr        
+0     003f457a  _OS_Sleep                         
+0     003f4995  _OS_Start                         
+0     003f4577  _OS_Suspend                       
+0     003f49ba  _OS_SystemTick_Handler_isr        
 0     003f43c3  _OS_Wait                          
-0     003f450f  _OS_fcn_SetInitialStack           
+0     003f44c6  _OS_fcn_SetInitialStack           
 0     003f43f5  _OS_u32_AddThreads                
 0     003f4387  _PIE_RESERVED                     
 1     003d7e80  _PartIdRegs                       
 1     00000ce0  _PieCtrlRegs                      
 1     00000d00  _PieVectTable                     
-0     003f4b8e  _PieVectTableInit                 
+0     003f4b0e  _PieVectTableInit                 
 0     003f401e  _RTOSINT_ISR                      
 0     003e8004  _RamfuncsLoadEnd                  
 abs   00000004  _RamfuncsLoadSize                 
@@ -730,7 +729,7 @@ abs   00000004  _RamfuncsLoadSize
 0     003f4226  _SPITXINTB_ISR                    
 1     00007050  _SciaRegs                         
 1     00007750  _ScibRegs                         
-0     003f45ff  _ServiceDog                       
+0     003f45b6  _ServiceDog                       
 1     00007040  _SpiaRegs                         
 1     00007740  _SpibRegs                         
 1     0000a000  _Stacks                           
@@ -756,64 +755,64 @@ abs   00000004  _RamfuncsLoadSize
 0     003f40dc  _XINT2_ISR                        
 0     003f435c  _XINT3_ISR                        
 1     00007070  _XIntruptRegs                     
-0     003f4745  _XtalOscSel                       
+0     003f46fc  _XtalOscSel                       
 1     00000250  __STACK_END                       
 abs   00000200  __STACK_SIZE                      
-1     0000c038  ___TI_cleanup_ptr                 
-1     0000c03a  ___TI_dtors_ptr                   
-1     0000c036  ___TI_enable_exit_profile_output  
+1     0000b420  ___TI_cleanup_ptr                 
+1     0000b422  ___TI_dtors_ptr                   
+1     0000b41e  ___TI_enable_exit_profile_output  
 abs   ffffffff  ___TI_pprof_out_hndl              
 abs   ffffffff  ___TI_prof_data_size              
 abs   ffffffff  ___TI_prof_data_start             
 abs   ffffffff  ___binit__                        
 abs   ffffffff  ___c_args__                       
-0     003f4c8e  ___cinit__                        
-0     003f4b8e  ___etext__                        
+0     003f4c0e  ___cinit__                        
+0     003f4b0e  ___etext__                        
 abs   ffffffff  ___pinit__                        
 0     003f4000  ___text__                         
-0     003f4b61  __args_main                       
-1     0000bfbc  __lock                            
-0     003f4b82  __nop                             
-0     003f4b7e  __register_lock                   
-0     003f4b7a  __register_unlock                 
+0     003f4ae1  __args_main                       
+1     0000b3be  __lock                            
+0     003f4b02  __nop                             
+0     003f4afe  __register_lock                   
+0     003f4afa  __register_unlock                 
 1     00000050  __stack                           
-0     003f4b8d  __system_post_cinit               
-0     003f4b8b  __system_pre_init                 
-1     0000bfbe  __unlock                          
-0     003f4aa9  _abort                            
-1     0000c000  _appSemaphore_Event1              
-1     0000c001  _appSemaphore_Event2              
-1     0000c002  _appSemaphore_Event3              
-0     003f4a06  _c_int00                          
-0     003f4b20  _copy_in                          
-0     003f4aab  _exit                             
-0     003f4866  _fcn_Event0ToggleGPIO50_J2_13     
-0     003f4879  _fcn_Event1ToggleGPIO51_J2_12     
-0     003f488c  _fcn_Event2ToggleGPIO55_J2_11     
-0     003f4826  _fcn_Func1                        
-0     003f482e  _fcn_Func2                        
-0     003f4836  _fcn_Func3                        
-0     003f483e  _fcn_Func4                        
-0     003f4844  _fcn_InitEvents                   
-0     003f4777  _fcn_InitThreadsGPIO              
-0     003f47c3  _fcn_Thread0ToogleGPIO34_D9_J1_5  
-0     003f47e1  _fcn_Thread1ToogleGPIO39_D10_J1_7 
-0     003f47fb  _fcn_Thread2ToogleGPIO22_J1_8     
-0     003f4808  _fcn_Thread3ToogleGPIO33_J1_9     
-0     003f480b  _fcn_Thread4ToogleGPIO32_J1_10    
-0     003f481a  _fcn_ToggleGPIO32                 
-0     003f4810  _fcn_ToggleGPIO33                 
-0     003f499b  _main                             
-0     003f4b44  _memcpy                           
-1     0000c040  _osExecTaskPtr                    
+0     003f4b0d  __system_post_cinit               
+0     003f4b0b  __system_pre_init                 
+1     0000b424  __unlock                          
+0     003f4a29  _abort                            
+1     0000b388  _appSemaphore_Event1              
+1     0000b389  _appSemaphore_Event2              
+1     0000b38a  _appSemaphore_Event3              
+0     003f493f  _c_int00                          
+0     003f4aa0  _copy_in                          
+0     003f4a2b  _exit                             
+0     003f482b  _fcn_Event0ToggleGPIO50_J2_13     
+0     003f4838  _fcn_Event1ToggleGPIO51_J2_12     
+0     003f4845  _fcn_Event2ToggleGPIO55_J2_11     
+0     003f47eb  _fcn_Func1                        
+0     003f47f3  _fcn_Func2                        
+0     003f47fb  _fcn_Func3                        
+0     003f4803  _fcn_Func4                        
+0     003f4809  _fcn_InitEvents                   
+0     003f472e  _fcn_InitThreadsGPIO              
+0     003f477a  _fcn_Thread0ToogleGPIO34_D9_J1_5  
+0     003f479c  _fcn_Thread1ToogleGPIO39_D10_J1_7 
+0     003f47bc  _fcn_Thread2ToogleGPIO22_J1_8     
+0     003f47cd  _fcn_Thread3ToogleGPIO33_J1_9     
+0     003f47d0  _fcn_Thread4ToogleGPIO32_J1_10    
+0     003f47df  _fcn_ToggleGPIO32                 
+0     003f47d5  _fcn_ToggleGPIO33                 
+0     003f49e2  _main                             
+0     003f4ac4  _memcpy                           
+1     0000b412  _osExecTaskPtr                    
 0     003f4391  _rsvd_ISR                         
-1     0000bf40  _sOS_TaskCtrlBlocks               
-1     0000bfb0  _sa_PeriodicEvents                
-1     0000c044  _sm_Scheduler                     
+1     0000b3c0  _sOS_TaskCtrlBlocks               
+1     0000b406  _sa_PeriodicEvents                
+1     0000b416  _sm_Scheduler                     
 abs   ffffffff  binit                             
-0     003f4c8e  cinit                             
+0     003f4c0e  cinit                             
 0     003f7ff6  code_start                        
-0     003f4b8e  etext                             
+0     003f4b0e  etext                             
 abs   ffffffff  pinit                             
 
 
@@ -928,63 +927,63 @@ page  address   name
 0     003f4460  _OS_AddPeriodicEventThread        
 0     003f446b  _OS_Launch                        
 0     003f449e  _OS_Scheduler                     
-0     003f450f  _OS_fcn_SetInitialStack           
-0     003f45c0  _OS_Suspend                       
-0     003f45c3  _OS_Sleep                         
-0     003f45d0  _OC_SetStackContenToZero          
-0     003f45e5  _InitSysCtrl                      
-0     003f45ff  _ServiceDog                       
-0     003f4609  _DisableDog                       
-0     003f4611  _InitPll                          
-0     003f4666  _InitPll2                         
-0     003f4694  _InitPeripheralClocks             
-0     003f46ea  _CsmUnlock                        
-0     003f471b  _IntOsc1Sel                       
-0     003f472b  _IntOsc2Sel                       
-0     003f4745  _XtalOscSel                       
-0     003f4761  _ExtOscSel                        
-0     003f4777  _fcn_InitThreadsGPIO              
-0     003f47c3  _fcn_Thread0ToogleGPIO34_D9_J1_5  
-0     003f47e1  _fcn_Thread1ToogleGPIO39_D10_J1_7 
-0     003f47fb  _fcn_Thread2ToogleGPIO22_J1_8     
-0     003f4808  _fcn_Thread3ToogleGPIO33_J1_9     
-0     003f480b  _fcn_Thread4ToogleGPIO32_J1_10    
-0     003f4810  _fcn_ToggleGPIO33                 
-0     003f481a  _fcn_ToggleGPIO32                 
-0     003f4826  _fcn_Func1                        
-0     003f482e  _fcn_Func2                        
-0     003f4836  _fcn_Func3                        
-0     003f483e  _fcn_Func4                        
-0     003f4844  _fcn_InitEvents                   
-0     003f4866  _fcn_Event0ToggleGPIO50_J2_13     
-0     003f4879  _fcn_Event1ToggleGPIO51_J2_12     
-0     003f488c  _fcn_Event2ToggleGPIO55_J2_11     
-0     003f489f  _OS_PeriodicEventsTick_Handler_isr
-0     003f4925  _InitCpuTimers                    
-0     003f4960  _ConfigCpuTimer                   
-0     003f499b  _main                             
-0     003f4a06  _c_int00                          
-0     003f4a5c  _OS_Start                         
-0     003f4a81  _OS_SystemTick_Handler_isr        
-0     003f4aa9  C$$EXIT                           
-0     003f4aa9  _abort                            
-0     003f4aab  _exit                             
-0     003f4ad2  _InitPieCtrl                      
-0     003f4af1  _EnableInterrupts                 
-0     003f4afa  _InitPieVectTable                 
-0     003f4b20  _copy_in                          
-0     003f4b44  _memcpy                           
-0     003f4b61  __args_main                       
-0     003f4b7a  __register_unlock                 
-0     003f4b7e  __register_lock                   
-0     003f4b82  __nop                             
-0     003f4b8b  __system_pre_init                 
-0     003f4b8d  __system_post_cinit               
-0     003f4b8e  _PieVectTableInit                 
-0     003f4b8e  ___etext__                        
-0     003f4b8e  etext                             
-0     003f4c8e  ___cinit__                        
-0     003f4c8e  cinit                             
+0     003f44c6  _OS_fcn_SetInitialStack           
+0     003f4577  _OS_Suspend                       
+0     003f457a  _OS_Sleep                         
+0     003f4587  _OC_SetStackContenToZero          
+0     003f459c  _InitSysCtrl                      
+0     003f45b6  _ServiceDog                       
+0     003f45c0  _DisableDog                       
+0     003f45c8  _InitPll                          
+0     003f461d  _InitPll2                         
+0     003f464b  _InitPeripheralClocks             
+0     003f46a1  _CsmUnlock                        
+0     003f46d2  _IntOsc1Sel                       
+0     003f46e2  _IntOsc2Sel                       
+0     003f46fc  _XtalOscSel                       
+0     003f4718  _ExtOscSel                        
+0     003f472e  _fcn_InitThreadsGPIO              
+0     003f477a  _fcn_Thread0ToogleGPIO34_D9_J1_5  
+0     003f479c  _fcn_Thread1ToogleGPIO39_D10_J1_7 
+0     003f47bc  _fcn_Thread2ToogleGPIO22_J1_8     
+0     003f47cd  _fcn_Thread3ToogleGPIO33_J1_9     
+0     003f47d0  _fcn_Thread4ToogleGPIO32_J1_10    
+0     003f47d5  _fcn_ToggleGPIO33                 
+0     003f47df  _fcn_ToggleGPIO32                 
+0     003f47eb  _fcn_Func1                        
+0     003f47f3  _fcn_Func2                        
+0     003f47fb  _fcn_Func3                        
+0     003f4803  _fcn_Func4                        
+0     003f4809  _fcn_InitEvents                   
+0     003f482b  _fcn_Event0ToggleGPIO50_J2_13     
+0     003f4838  _fcn_Event1ToggleGPIO51_J2_12     
+0     003f4845  _fcn_Event2ToggleGPIO55_J2_11     
+0     003f4852  _OS_PeriodicEventsTick_Handler_isr
+0     003f48c9  _InitCpuTimers                    
+0     003f4904  _ConfigCpuTimer                   
+0     003f493f  _c_int00                          
+0     003f4995  _OS_Start                         
+0     003f49ba  _OS_SystemTick_Handler_isr        
+0     003f49e2  _main                             
+0     003f4a29  C$$EXIT                           
+0     003f4a29  _abort                            
+0     003f4a2b  _exit                             
+0     003f4a52  _InitPieCtrl                      
+0     003f4a71  _EnableInterrupts                 
+0     003f4a7a  _InitPieVectTable                 
+0     003f4aa0  _copy_in                          
+0     003f4ac4  _memcpy                           
+0     003f4ae1  __args_main                       
+0     003f4afa  __register_unlock                 
+0     003f4afe  __register_lock                   
+0     003f4b02  __nop                             
+0     003f4b0b  __system_pre_init                 
+0     003f4b0d  __system_post_cinit               
+0     003f4b0e  _PieVectTableInit                 
+0     003f4b0e  ___etext__                        
+0     003f4b0e  etext                             
+0     003f4c0e  ___cinit__                        
+0     003f4c0e  cinit                             
 0     003f7ff6  code_start                        
 1     00000050  __stack                           
 1     00000250  __STACK_END                       
@@ -1044,21 +1043,21 @@ page  address   name
 1     00007750  _ScibRegs                         
 1     00007900  _I2caRegs                         
 1     0000a000  _Stacks                           
-1     0000bf40  _sOS_TaskCtrlBlocks               
-1     0000bfb0  _sa_PeriodicEvents                
-1     0000bfbc  __lock                            
-1     0000bfbe  __unlock                          
-1     0000c000  _appSemaphore_Event1              
-1     0000c001  _appSemaphore_Event2              
-1     0000c002  _appSemaphore_Event3              
-1     0000c01e  _CpuTimer0                        
-1     0000c026  _CpuTimer1                        
-1     0000c02e  _CpuTimer2                        
-1     0000c036  ___TI_enable_exit_profile_output  
-1     0000c038  ___TI_cleanup_ptr                 
-1     0000c03a  ___TI_dtors_ptr                   
-1     0000c040  _osExecTaskPtr                    
-1     0000c044  _sm_Scheduler                     
+1     0000b388  _appSemaphore_Event1              
+1     0000b389  _appSemaphore_Event2              
+1     0000b38a  _appSemaphore_Event3              
+1     0000b3a6  _CpuTimer0                        
+1     0000b3ae  _CpuTimer1                        
+1     0000b3b6  _CpuTimer2                        
+1     0000b3be  __lock                            
+1     0000b3c0  _sOS_TaskCtrlBlocks               
+1     0000b406  _sa_PeriodicEvents                
+1     0000b412  _osExecTaskPtr                    
+1     0000b416  _sm_Scheduler                     
+1     0000b41e  ___TI_enable_exit_profile_output  
+1     0000b420  ___TI_cleanup_ptr                 
+1     0000b422  ___TI_dtors_ptr                   
+1     0000b424  __unlock                          
 1     003d7e80  _PartIdRegs                       
 1     003f7ff8  _CsmPwl                           
 abs   00000004  _RamfuncsLoadSize                 

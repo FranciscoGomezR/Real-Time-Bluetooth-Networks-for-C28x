@@ -82,38 +82,28 @@ void main(void)
 	OS_Initialization();
 	//Set GPIO to be use by Threads as outputs
 	fcn_InitThreadsGPIO();
-	//Set Even-Threads into the scheduler in Round-Robin with priority
-	OS_u32_AddThreads(&fcn_Event0ToggleGPIO50_J2_13,        OS_RealTime_Thread_ID0,OS_RealTime_Thread_ID1,  2);
-    OS_u32_AddThreads(&fcn_Event1ToggleGPIO51_J2_12,        OS_RealTime_Thread_ID1,OS_RealTime_Thread_ID2,  2);
-    OS_u32_AddThreads(&fcn_Event2ToggleGPIO55_J2_11,        OS_RealTime_Thread_ID2,OS_Standard_Thread_ID0,  1);
     //Set Normal-Threads into the scheduler in Round-Robin with priority
 	OS_u32_AddThreads(&fcn_Thread0ToogleGPIO34_D9_J1_5,     OS_Standard_Thread_ID0,OS_Standard_Thread_ID1,  3);
 	OS_u32_AddThreads(&fcn_Thread1ToogleGPIO39_D10_J1_7,    OS_Standard_Thread_ID1,OS_Standard_Thread_ID2,  3);
 	OS_u32_AddThreads(&fcn_Thread2ToogleGPIO22_J1_8,        OS_Standard_Thread_ID2,OS_Standard_Thread_ID3,  3);
 	OS_u32_AddThreads(&fcn_Thread3ToogleGPIO33_J1_9,        OS_Standard_Thread_ID3,OS_Standard_Thread_ID4,  3);
-	OS_u32_AddThreads(&fcn_Thread4ToogleGPIO32_J1_10,       OS_Standard_Thread_ID4,OS_RealTime_Thread_ID0,  3);
+	OS_u32_AddThreads(&fcn_Thread4ToogleGPIO32_J1_10,       OS_Standard_Thread_ID4,OS_Standard_Thread_ID0,  3);
 	//Set which Thread will run First
 	OS_FirstThreadToRun(OS_RealTime_Thread_ID0);
-	//Init. Semaphores to control periodic Event-threads
-	OS_InitSemaphore(&appSemaphore_Event1, OS_SEMAPHORE_WAIT);
-	OS_InitSemaphore(&appSemaphore_Event2, OS_SEMAPHORE_WAIT);
-	OS_InitSemaphore(&appSemaphore_Event3, OS_SEMAPHORE_WAIT);
+
 	//Init. ans set Ticks for each periodic event-thread
 	OS_AddPeriodicEventThread((s_PeriodicEvent *)&sa_PeriodicEvents[OS_RealTime_Thread_ID0],
-	                          &appSemaphore_Event1, //Ctrl semaphore
+	                          fcn_Event0ToggleGPIO50_J2_13,
 	                          13);                  //in mili-seconds
 	OS_AddPeriodicEventThread((s_PeriodicEvent *)&sa_PeriodicEvents[OS_RealTime_Thread_ID1],
-	                          &appSemaphore_Event2, //Ctrl semaphore
+	                          fcn_Event1ToggleGPIO51_J2_12,
 	                          50);                  //in mili-seconds
 	OS_AddPeriodicEventThread((s_PeriodicEvent *)&sa_PeriodicEvents[OS_RealTime_Thread_ID2],
-	                          &appSemaphore_Event3, //Ctrl semaphore
+	                          fcn_Event2ToggleGPIO55_J2_11,
 	                          123);                 //in mili-seconds
 	//Launch OS and dispatch first Thread
 	OS_Launch(OS_TASKS_TIMESLICE_US);
-    for(;;);
-    {
-        
-    }
+    return 0;
 }
 //
 // End of File

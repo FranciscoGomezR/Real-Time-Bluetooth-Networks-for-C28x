@@ -266,10 +266,10 @@ void OS_FirstThreadToRun(Uint16 ThreadID)
  *              period given in units of OS_Launch
  * Return:      1 if successful, 0 if this thread cannot be added
  *****************************************************************************/
-void OS_AddPeriodicEventThread(struct struct_PeriodicEvents *ptrfcn_Event, int16 *ptrSemaphore, Uint32 Period_ms)
+void OS_AddPeriodicEventThread(struct struct_PeriodicEvents *ptrfcn_EventBlock, void(*ptrfcn_Event)(void), Uint32 Period_ms)
 {
-    ptrfcn_Event->ptrSemaphore = ptrSemaphore;
-    ptrfcn_Event->Ticks = (Uint32)Period_ms;//(OS_SLEEP_TIMETICK__US*Period_ms);
+    ptrfcn_EventBlock->OS_ptrfcn_Event = ptrfcn_Event;
+    ptrfcn_EventBlock->Ticks = (Uint32)Period_ms;//(OS_SLEEP_TIMETICK__US*Period_ms);
 }
 //Uint32 OS_AddPeriodicEventThread(void(*ptrfcn_Event)(void), Uint32 Period_ms)
 //{
@@ -366,9 +366,8 @@ void OS_Scheduler(void)
 
     PriorityToRun   = OS_PRIOROTY_MINIMUM_LEVEL;
     ptrSearchThread = osExecTaskPtr;
-    if(sm_Scheduler.ToRun == S0_scheduler_Normal)
-    {   //This state inf fr normal operation of the scheduler (No event-thread needs to be dispatch)
-        Counter         = (OS_Global_Thread_IDmax) - 1;
+
+        Counter         = (OS_Global_Thread_IDmax);
         while( Counter-- )
         {
             //point to the "theorical" next thread to run
@@ -389,55 +388,7 @@ void OS_Scheduler(void)
                 ptrThreadtToRun = ptrSearchThread;
             }else{}
         }// Loop to look in all threads
-    }else{
-        if(sm_Scheduler.ToRun == S1_scheduler_Events)
-        {   //Second state is to handle Event-threads so, just look-up for the events only
-            //and dispatch it or them
-            Counter         = OS_RealTime_MaxID;
-            ptrSearchThread =  &sOS_TaskCtrlBlocks[OS_RealTime_Thread_ID0];
-            while( Counter-- )
-            {
-                if(     (ptrSearchThread->WorkingPriority < PriorityToRun)
-                        &&
-                        (ptrSearchThread->ptrBlockStatus == 0))
-                {
 
-                    PriorityToRun = ptrSearchThread->WorkingPriority;
-                    ptrThreadtToRun = ptrSearchThread;
-                }else{}
-                //point to the "theorical" next thread to run
-                ptrSearchThread = ptrSearchThread->nextThreadSP;
-            }// Loop to look in all Evetn-threads
-            sm_Scheduler.NoEventsTriggered = sm_Scheduler.NoEventsTriggered - 1;
-            if(sm_Scheduler.NoEventsTriggered > 0)
-            {
-                sm_Scheduler.ToRun = S1_scheduler_Events;
-            }else{
-                sm_Scheduler.ToRun = S2_scheduler_Resume;
-            }
-        }else{
-            if(sm_Scheduler.ToRun == S2_scheduler_Resume)
-            {   //Thrid sate is to resume the previous normal-thread that was running then continue in
-                //normal mode
-                Counter = (OS_Global_Thread_IDmax-OS_RealTime_MaxID);
-                ptrSearchThread =  &sOS_TaskCtrlBlocks[OS_Standard_Thread_ID0];
-                while( Counter-- )
-                {   //Search for the thread that was interrupted with the highest priority
-                    if( (ptrSearchThread->Interrupted == OS_THREAD_INTERRUPED)
-                        &&
-                        (ptrSearchThread->ptrBlockStatus == 0) )
-                    {
-                        ptrSearchThread->Interrupted = OS_THREAD_INT__CLEAR;
-                        ptrThreadtToRun = ptrSearchThread;
-                    }else{
-                        //point to the "theorical" next thread to run
-                        ptrSearchThread = ptrSearchThread->nextThreadSP;
-                    }
-                }   //return to normal state
-                sm_Scheduler.ToRun = S0_scheduler_Normal;
-            }else{sm_Scheduler.ToRun = S0_scheduler_Normal;}
-        }
-    }
     // if loop has reach the thread that was running prior to run schedules, search is done.
     osExecTaskPtr = (s_TaskCtrlBlock *)ptrThreadtToRun;
     //osExecTaskPtr = osExecTaskPtr->nextThreadSP;
@@ -452,9 +403,9 @@ void OS_Scheduler(void)
  *****************************************************************************/
 __interrupt void OS_PeriodicEventsTick_Handler_isr(void)
 {
-    Uint16 flag=0;
     Uint16 IDcounter=OS_RealTime_MaxID;
     s_TaskCtrlBlock *ptrSearchThread;
+    DISABLE_GLOBAL_INT();
     #if GPIO13_FOR_DEBUGGING == ENABLE
     EALLOW;
     GpioDataRegs.GPATOGGLE.bit.GPIO13 = 1;
@@ -463,17 +414,15 @@ __interrupt void OS_PeriodicEventsTick_Handler_isr(void)
     PeriodicTicksCounter = ( PeriodicTicksCounter + 1 );
     if(PeriodicTicksCounter)
     {
-        while(IDcounter)
+        IDcounter=OS_RealTime_MaxID;
+        while(IDcounter--)
         {
-            if((PeriodicTicksCounter % sa_PeriodicEvents[IDcounter-1].Ticks) == 0)
+            if((PeriodicTicksCounter % sa_PeriodicEvents[IDcounter].Ticks) == 0)
             {
-                OS_Signal((int16 *)sa_PeriodicEvents[IDcounter-1].ptrSemaphore);
-                OS_RISE_EVENT_FLAG();
-                flag=1;
+                sa_PeriodicEvents[IDcounter].OS_ptrfcn_Event();
             }else{}
-            IDcounter--;
         }
-        //for(IDcounter=0; IDcounter<OS_Global_Thread_IDmax; IDcounter++)
+
         ptrSearchThread = osExecTaskPtr;
         IDcounter = OS_Global_Thread_IDmax;
         while(IDcounter--)
@@ -484,38 +433,8 @@ __interrupt void OS_PeriodicEventsTick_Handler_isr(void)
             }else{}
             ptrSearchThread = ptrSearchThread->nextThreadSP;
         }
-        if(flag)
-        {
-            OS_Suspend();
-        }else{  }
     }else{      }
-
-
-/*    int flag=0;
-    int IDcounter=OS_RealTime_MaxID;
-    #if GPIO13_FOR_DEBUGGING == ENABLE
-    EALLOW;
-    GpioDataRegs.GPATOGGLE.bit.GPIO13 = 1;
-    EDIS;
-    #endif
-    PeriodicTicksCounter = ( PeriodicTicksCounter + 1 );
-    if(PeriodicTicksCounter)
-    {
-        while(IDcounter)
-        {
-            if((PeriodicTicksCounter % sa_PeriodicEvents[IDcounter-1].Ticks) == 0)
-            {
-                OS_Signal((int16 *)sa_PeriodicEvents[IDcounter-1].ptrSemaphore);
-                OS_RISE_EVENT_FLAG();
-                flag=1;
-            }else{}
-            IDcounter--;
-        }
-        if(flag)
-        {
-            OS_Suspend();
-        }else{  }
-    }else{      }*/
+    ENABLE__GLOBAL_INT();
 }
 
 /*****************************************************************************
